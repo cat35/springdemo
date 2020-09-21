@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping
 public class ModelController {
 
     private final ModelRepo modelRepo;
@@ -22,17 +23,17 @@ public class ModelController {
     }
 
     @GetMapping("/models")
-    public List<Model> getAll(){
+    public List<Model> getAllModels(){
         return (List<Model>) modelRepo.findAll();
     }
 
     @DeleteMapping("/models/{id}")
-    public void deleteMachine(@PathVariable Long id){
+    public void deleteModel(@PathVariable Long id){
         modelRepo.deleteById(id);
     }
 
-    @PutMapping("/machines/{id}")
-    public ResponseEntity<Object> updateMachines(@RequestBody Model model, @PathVariable Long id){
+    @PutMapping("/models/{id}")
+    public ResponseEntity<Object> updateModels(@RequestBody Model model, @PathVariable Long id){
         Optional<Model> modelOptional = modelRepo.findById(id);
 
         if(!modelOptional.isPresent())
@@ -45,8 +46,8 @@ public class ModelController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/machines")
-    public ResponseEntity<Object> createMachine(@RequestBody Model model){
+    @PostMapping("/models")
+    public ResponseEntity<Object> createModels(@RequestBody Model model){
         Model savedModel = modelRepo.save(model);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedModel.getId()).toUri();

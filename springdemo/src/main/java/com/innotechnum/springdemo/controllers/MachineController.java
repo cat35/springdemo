@@ -1,7 +1,6 @@
 package com.innotechnum.springdemo.controllers;
 
 import com.innotechnum.springdemo.entities.Machine;
-import com.innotechnum.springdemo.entities.Model;
 import com.innotechnum.springdemo.repository.MachineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +9,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@RequestMapping
 public class MachineController {
     private final MachineRepo repo;
 
@@ -23,7 +22,7 @@ public class MachineController {
     }
 
     @GetMapping("/machines")
-    public List<Machine> getAll() {
+    public List<Machine> getAllMachines() {
         return (List<Machine>) repo.findAll();
     }
 

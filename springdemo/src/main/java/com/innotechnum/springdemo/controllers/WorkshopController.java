@@ -1,6 +1,5 @@
 package com.innotechnum.springdemo.controllers;
 
-import com.innotechnum.springdemo.entities.Type;
 import com.innotechnum.springdemo.entities.Workshop;
 import com.innotechnum.springdemo.repository.WorkshopRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping
 public class WorkshopController {
 
     private final WorkshopRepo workshopRepo;
@@ -23,17 +23,17 @@ public class WorkshopController {
     }
 
     @GetMapping("/workshops")
-    public List<Workshop> getAll() {
+    public List<Workshop> getAllWorkshops() {
         return (List<Workshop>) workshopRepo.findAll();
     }
 
     @DeleteMapping("/workshops/{id}")
-    public void deleteMachine(@PathVariable Long id){
+    public void deleteWorkshop(@PathVariable Long id){
         workshopRepo.deleteById(id);
     }
 
-    @PutMapping("/machines/{id}")
-    public ResponseEntity<Object> updateMachines(@RequestBody Workshop workshop, @PathVariable Long id){
+    @PutMapping("/workshops/{id}")
+    public ResponseEntity<Object> updateWorkshop(@RequestBody Workshop workshop, @PathVariable Long id){
         Optional<Workshop> typeOptional = workshopRepo.findById(id);
 
         if(!typeOptional.isPresent())
@@ -46,8 +46,8 @@ public class WorkshopController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/machines")
-    public ResponseEntity<Object> createMachine(@RequestBody Workshop workshop){
+    @PostMapping("/workshops")
+    public ResponseEntity<Object> createWorkshop(@RequestBody Workshop workshop){
         Workshop savedWorkshop = workshopRepo.save(workshop);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedWorkshop.getId()).toUri();

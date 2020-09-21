@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping
+
 public class TypeController {
 
     private final TypeRepo typeRepo;
@@ -23,19 +24,19 @@ public class TypeController {
         this.typeRepo = typeRepo;
     }
 
-    @GetMapping("/type")
-    public List<Type> getAll() {
+    @GetMapping("/types")
+    public List<Type> getAllTypes() {
         return (List<Type>) typeRepo.findAll();
     }
 
 
     @DeleteMapping("/types/{id}")
-    public void deleteMachine(@PathVariable Long id){
+    public void deleteTypes(@PathVariable Long id){
         typeRepo.deleteById(id);
     }
 
-    @PutMapping("/machines/{id}")
-    public ResponseEntity<Object> updateMachines(@RequestBody Type type, @PathVariable Long id){
+    @PutMapping("/types/{id}")
+    public ResponseEntity<Object> updateTypes(@RequestBody Type type, @PathVariable Long id){
         Optional<Type> typeOptional = typeRepo.findById(id);
 
         if(!typeOptional.isPresent())
@@ -48,8 +49,8 @@ public class TypeController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/machines")
-    public ResponseEntity<Object> createMachine(@RequestBody Type type){
+    @PostMapping("/types")
+    public ResponseEntity<Object> createType(@RequestBody Type type){
         Type savedType = typeRepo.save(type);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedType.getId()).toUri();

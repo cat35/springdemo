@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("maker")
+@RequestMapping
 public class MakerController {
 
     private final MakerRepo makerRepo;
@@ -24,17 +24,17 @@ public class MakerController {
     }
 
     @GetMapping("/makers")
-    public List<Maker> getAll() {
+    public List<Maker> getAllMakers() {
         return (List<Maker>) makerRepo.findAll();
     }
 
     @DeleteMapping("/makers/{id}")
-    public void deleteMachine(@PathVariable Long id){
+    public void deleteMaker(@PathVariable Long id){
         makerRepo.deleteById(id);
     }
 
     @PutMapping("/makers/{id}")
-    public ResponseEntity<Object> updateMachines(@RequestBody Maker maker, @PathVariable Long id){
+    public ResponseEntity<Object> updateMaker(@RequestBody Maker maker, @PathVariable Long id){
         Optional<Maker> makerOptional = makerRepo.findById(id);
 
         if(!makerOptional.isPresent())
@@ -47,8 +47,8 @@ public class MakerController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/machines")
-    public ResponseEntity<Object> createMachine(@RequestBody Maker maker){
+    @PostMapping("/makers")
+    public ResponseEntity<Object> createMaker(@RequestBody Maker maker){
         Maker savedMaker = makerRepo.save(maker);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedMaker.getId()).toUri();
