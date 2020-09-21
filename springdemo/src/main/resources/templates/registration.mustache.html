@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns = "http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringSecurityExample</title>
+</head>
+<body>
+Add new user
+<form action="/registration" method="post"></form>
+<div><label>User Name : <input type="text" name="username"/></label></div>
+<div><label>Password : <input type="text" name="password"/></label></div>
+<input type="hidden" name="crsf" value="{{_csrf.token}}"/>
+<div><input type="submit" value="Sign in"></div>
+
+</body>
+</html>
