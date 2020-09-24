@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
-
+@RequestMapping("/types")
 public class TypeController {
 
     private final TypeRepo typeRepo;
@@ -24,7 +23,7 @@ public class TypeController {
         this.typeRepo = typeRepo;
     }
 
-    @GetMapping("/types")
+    @GetMapping
     public List<Type> getAllTypes() {
         return (List<Type>) typeRepo.findAll();
     }
@@ -35,7 +34,7 @@ public class TypeController {
         typeRepo.deleteById(id);
     }
 
-    @PutMapping("/types/{id}")
+    @PutMapping
     public ResponseEntity<Object> updateTypes(@RequestBody Type type, @PathVariable Long id){
         Optional<Type> typeOptional = typeRepo.findById(id);
 
@@ -49,7 +48,7 @@ public class TypeController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/types")
+    @PostMapping
     public ResponseEntity<Object> createType(@RequestBody Type type){
         Type savedType = typeRepo.save(type);
 

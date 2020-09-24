@@ -20,16 +20,5 @@ public class Machine {
 
     private int price;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Machine(Model model, int price) {
-        this.model = model;
-        this.price = price;
-    }
 }

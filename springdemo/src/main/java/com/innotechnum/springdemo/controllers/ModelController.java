@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/models")
 public class ModelController {
 
     private final ModelRepo modelRepo;
@@ -22,7 +22,7 @@ public class ModelController {
         this.modelRepo = modelRepo;
     }
 
-    @GetMapping("/models")
+    @GetMapping
     public List<Model> getAllModels(){
         return (List<Model>) modelRepo.findAll();
     }
@@ -32,7 +32,7 @@ public class ModelController {
         modelRepo.deleteById(id);
     }
 
-    @PutMapping("/models/{id}")
+    @PutMapping
     public ResponseEntity<Object> updateModels(@RequestBody Model model, @PathVariable Long id){
         Optional<Model> modelOptional = modelRepo.findById(id);
 
@@ -46,7 +46,7 @@ public class ModelController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/models")
+    @PostMapping
     public ResponseEntity<Object> createModels(@RequestBody Model model){
         Model savedModel = modelRepo.save(model);
 

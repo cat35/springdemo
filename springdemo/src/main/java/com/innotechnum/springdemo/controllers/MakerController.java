@@ -1,6 +1,5 @@
 package com.innotechnum.springdemo.controllers;
 
-import com.innotechnum.springdemo.entities.Machine;
 import com.innotechnum.springdemo.entities.Maker;
 import com.innotechnum.springdemo.repository.MakerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/maker")
 public class MakerController {
 
     private final MakerRepo makerRepo;
@@ -23,7 +22,7 @@ public class MakerController {
         this.makerRepo = makerRepo;
     }
 
-    @GetMapping("/makers")
+    @GetMapping
     public List<Maker> getAllMakers() {
         return (List<Maker>) makerRepo.findAll();
     }
@@ -33,7 +32,7 @@ public class MakerController {
         makerRepo.deleteById(id);
     }
 
-    @PutMapping("/makers/{id}")
+    @PutMapping
     public ResponseEntity<Object> updateMaker(@RequestBody Maker maker, @PathVariable Long id){
         Optional<Maker> makerOptional = makerRepo.findById(id);
 
@@ -47,7 +46,7 @@ public class MakerController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/makers")
+    @PostMapping
     public ResponseEntity<Object> createMaker(@RequestBody Maker maker){
         Maker savedMaker = makerRepo.save(maker);
 

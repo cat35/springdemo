@@ -16,11 +16,7 @@ public class Workshop {
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Machine> list;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Workshop(Long id) {
         this.id = id;
     }
 }

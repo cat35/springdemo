@@ -1,11 +1,15 @@
 package com.innotechnum.springdemo.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class MachineToWorkshop {
     @Id
@@ -14,7 +18,7 @@ public class MachineToWorkshop {
 
     private LocalDate dateIn;
 
-    private LocalDate dateOut;
+    private LocalDate dateOut = LocalDate.ofYearDay(3000, 1);
 
     @ManyToOne
     @JoinColumn(name = "machine")

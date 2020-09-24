@@ -4,6 +4,7 @@ import com.innotechnum.springdemo.entities.Machine;
 import com.innotechnum.springdemo.repository.MachineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/machines")
 public class MachineController {
     private final MachineRepo repo;
 
@@ -21,7 +22,7 @@ public class MachineController {
         this.repo = repo;
     }
 
-    @GetMapping("/machines")
+    @GetMapping
     public List<Machine> getAllMachines() {
         return (List<Machine>) repo.findAll();
     }
@@ -31,7 +32,7 @@ public class MachineController {
         repo.deleteById(id);
     }
 
-   @PutMapping("/machines/{id}")
+   @PutMapping
     public ResponseEntity<Object> updateMachines(@RequestBody Machine machine, @PathVariable Long id){
        Optional<Machine> machineOptional = repo.findById(id);
 
@@ -45,7 +46,7 @@ public class MachineController {
        return ResponseEntity.noContent().build();
    }
 
-   @PostMapping("/machines")
+   @PostMapping
     public ResponseEntity<Object> createMachine(@RequestBody Machine machine){
         Machine savedMachine = repo.save(machine);
 

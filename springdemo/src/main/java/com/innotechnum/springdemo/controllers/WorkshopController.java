@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/workshops")
 public class WorkshopController {
 
     private final WorkshopRepo workshopRepo;
@@ -22,7 +22,7 @@ public class WorkshopController {
         this.workshopRepo = workshopRepo;
     }
 
-    @GetMapping("/workshops")
+    @GetMapping
     public List<Workshop> getAllWorkshops() {
         return (List<Workshop>) workshopRepo.findAll();
     }
@@ -32,7 +32,7 @@ public class WorkshopController {
         workshopRepo.deleteById(id);
     }
 
-    @PutMapping("/workshops/{id}")
+    @PutMapping
     public ResponseEntity<Object> updateWorkshop(@RequestBody Workshop workshop, @PathVariable Long id){
         Optional<Workshop> typeOptional = workshopRepo.findById(id);
 
@@ -46,7 +46,7 @@ public class WorkshopController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/workshops")
+    @PostMapping
     public ResponseEntity<Object> createWorkshop(@RequestBody Workshop workshop){
         Workshop savedWorkshop = workshopRepo.save(workshop);
 
