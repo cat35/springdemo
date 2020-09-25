@@ -32,13 +32,9 @@ public class UserController {
     @PostMapping
     public String userSave(
             @RequestParam String username,
-            @RequestParam Map<String, String> form,
             @RequestParam("userId") User user){
 
         user.setUserName(username);
-
-       Set<String> roles = Arrays.stream(Role.values()).map(Role::name).collect(Collectors.toSet());
-
         userRepo.save(user);
 
         return "redirect:/user";

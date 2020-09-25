@@ -41,9 +41,9 @@ public class ModelController {
 
         model.setId(id);
 
-        modelRepo.save(model);
 
-        return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(modelRepo.save(model));
     }
 
     @PostMapping

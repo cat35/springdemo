@@ -18,31 +18,23 @@ import java.util.List;
 public class MachineToWorkshopController {
     private final MachineToWorkshopRepo machineToWorkshopRepo;
 
-    @Autowired
-    private MachineToWorkshopService service;
+    private final MachineToWorkshopService service;
 
     @Autowired
-    public MachineToWorkshopController(MachineToWorkshopRepo machineToWorkshopRepo) {
+    public MachineToWorkshopController(MachineToWorkshopRepo machineToWorkshopRepo, MachineToWorkshopService service) {
         this.machineToWorkshopRepo = machineToWorkshopRepo;
+        this.service = service;
     }
-
-
 
     @GetMapping
     public List<MachineToWorkshop> getAll() {
         return (List<MachineToWorkshop>) machineToWorkshopRepo.findAll();
     }
 
-    @PostMapping
-    public MachineToWorkshop processTransfer(Long idMachine, Long idWorkshop, LocalDate date){
-        MachineToWorkshop machineToWorkshop = new MachineToWorkshop();
-        try{
-
-         machineToWorkshop = service.transfer(idMachine, idWorkshop, date);
-        }
-        catch(Exception e){
-
-        }
+    @PostMapping("/machineToWorkshop/change")
+    public MachineToWorkshop processTransfer(Long idMachine, Long idWorkshop, LocalDate date) {
+        MachineToWorkshop machineToWorkshop;
+            machineToWorkshop = service.transfer(idMachine, idWorkshop, date);
         return machineToWorkshop;
     }
 }

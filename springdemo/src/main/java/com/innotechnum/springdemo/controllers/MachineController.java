@@ -41,9 +41,9 @@ public class MachineController {
 
        machine.setId(id);
 
-       repo.save(machine);
 
-       return ResponseEntity.noContent().build();
+
+       return ResponseEntity.ok(repo.save(machine));
    }
 
    @PostMapping

@@ -41,9 +41,9 @@ public class MakerController {
 
         maker.setId(id);
 
-        makerRepo.save(maker);
 
-        return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(makerRepo.save(maker));
     }
 
     @PostMapping

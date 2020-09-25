@@ -43,9 +43,9 @@ public class TypeController {
 
         type.setId(id);
 
-        typeRepo.save(type);
 
-        return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(typeRepo.save(type));
     }
 
     @PostMapping
