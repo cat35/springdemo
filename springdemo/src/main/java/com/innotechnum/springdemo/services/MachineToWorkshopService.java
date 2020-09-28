@@ -27,7 +27,7 @@ public class MachineToWorkshopService {
             machineToWorkshop.setDateOut(date);
             MachineToWorkshop machineToWorkshop1 = new MachineToWorkshop();
             machineToWorkshop1.setDateIn(date.plusDays(1));
-            machineToWorkshop1.setWorkshop(new Workshop(idWorkshop));
+            machineToWorkshop1.setIdWorkshop(idWorkshop);
             return machineToWorkshop1;
 
     }

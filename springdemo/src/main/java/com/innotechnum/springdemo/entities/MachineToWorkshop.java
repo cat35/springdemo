@@ -20,13 +20,17 @@ public class MachineToWorkshop {
 
     private LocalDate dateOut = LocalDate.ofYearDay(3000, 1);
 
-    @ManyToOne
-    @JoinColumn(name = "machine")
-    private Machine machine;
+//    @ManyToOne
+//    @JoinColumn(name = "machine_id")
+//    private Machine machine;
+//
+//
+//    @ManyToOne
+//    @JoinColumn(name = "workshop_id")
+//    private Workshop workshop;
 
+    private Long idMachine;
 
-    @ManyToOne
-    @JoinColumn(name = "workshop_id")
-    private Workshop workshop;
+    private Long idWorkshop;
 
 }
