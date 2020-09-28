@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface MachineToWorkshopRepo extends CrudRepository<MachineToWorkshop, Long> {
 
     MachineToWorkshop findFirstByIdMachineOrderByDateInDesc(Long idMachine);
+
+
 }

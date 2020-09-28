@@ -22,11 +22,13 @@ public class MachineToWorkshopService {
 
     @Transactional
     public MachineToWorkshop transfer(Long idMachine, Long idWorkshop, LocalDate date){
-        MachineToWorkshop machineToWorkshop = machineToWorkshopRepo.findFirstByIdMachineOrderByDateInDesc(idMachine);
-         machineToWorkshop.setDateOut(date);
-         MachineToWorkshop machineToWorkshop1 = new MachineToWorkshop();
-         machineToWorkshop1.setDateIn(date.plusDays(1));
-         machineToWorkshop1.setWorkshop(new Workshop(idWorkshop));
-         return machineToWorkshop1;
+
+            MachineToWorkshop machineToWorkshop = machineToWorkshopRepo.findFirstByIdMachineOrderByDateInDesc(idMachine);
+            machineToWorkshop.setDateOut(date);
+            MachineToWorkshop machineToWorkshop1 = new MachineToWorkshop();
+            machineToWorkshop1.setDateIn(date.plusDays(1));
+            machineToWorkshop1.setWorkshop(new Workshop(idWorkshop));
+            return machineToWorkshop1;
+
     }
 }
