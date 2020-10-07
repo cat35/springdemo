@@ -27,13 +27,13 @@ public class MachineController {
         return (List<Machine>) repo.findAll();
     }
 
-    @DeleteMapping("/machines/{id}")
+    @DeleteMapping("/{id}")
     public void deleteMachine(@PathVariable Long id){
         repo.deleteById(id);
     }
 
    @PutMapping
-    public ResponseEntity<Object> updateMachines(@RequestBody Machine machine, @PathVariable Long id){
+    public ResponseEntity<Machine> updateMachines(@RequestBody Machine machine, @PathVariable Long id){
        Optional<Machine> machineOptional = repo.findById(id);
 
        if(!machineOptional.isPresent())
@@ -41,13 +41,11 @@ public class MachineController {
 
        machine.setId(id);
 
-
-
        return ResponseEntity.ok(repo.save(machine));
    }
 
    @PostMapping
-    public ResponseEntity<Object> createMachine(@RequestBody Machine machine){
+    public ResponseEntity<Machine> createMachine(@RequestBody Machine machine){
         Machine savedMachine = repo.save(machine);
 
        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedMachine.getId()).toUri();

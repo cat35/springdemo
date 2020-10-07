@@ -33,7 +33,7 @@ public class MakerController {
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateMaker(@RequestBody Maker maker, @PathVariable Long id){
+    public ResponseEntity<Maker> updateMaker(@RequestBody Maker maker, @PathVariable Long id){
         Optional<Maker> makerOptional = makerRepo.findById(id);
 
         if(!makerOptional.isPresent())
@@ -47,7 +47,7 @@ public class MakerController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createMaker(@RequestBody Maker maker){
+    public ResponseEntity<Maker> createMaker(@RequestBody Maker maker){
         Maker savedMaker = makerRepo.save(maker);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedMaker.getId()).toUri();

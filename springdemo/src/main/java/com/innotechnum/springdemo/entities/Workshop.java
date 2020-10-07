@@ -11,12 +11,12 @@ public class Workshop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int number;
+    private Integer number;
 
-   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Machine> list;
+//   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Machine> list;
 
-    public Workshop(Long id) {
-        this.id = id;
-    }
+//    public Workshop(Long id) {
+//        this.id = id;
+//    }
 }

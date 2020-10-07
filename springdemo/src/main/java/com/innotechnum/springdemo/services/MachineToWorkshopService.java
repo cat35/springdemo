@@ -1,8 +1,6 @@
 package com.innotechnum.springdemo.services;
 
-import com.innotechnum.springdemo.entities.Machine;
 import com.innotechnum.springdemo.entities.MachineToWorkshop;
-import com.innotechnum.springdemo.entities.Workshop;
 import com.innotechnum.springdemo.repository.MachineToWorkshopRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,13 +19,14 @@ public class MachineToWorkshopService {
     }
 
     @Transactional
-    public MachineToWorkshop transfer(Long idMachine, Long idWorkshop, LocalDate date){
+    public MachineToWorkshop transfer(LocalDate date, Long idMachine, Long idWorkshop){
 
             MachineToWorkshop machineToWorkshop = machineToWorkshopRepo.findFirstByIdMachineOrderByDateInDesc(idMachine);
             machineToWorkshop.setDateOut(date);
             MachineToWorkshop machineToWorkshop1 = new MachineToWorkshop();
             machineToWorkshop1.setDateIn(date.plusDays(1));
             machineToWorkshop1.setIdWorkshop(idWorkshop);
+        machineToWorkshopRepo.save(machineToWorkshop1);
             return machineToWorkshop1;
 
     }

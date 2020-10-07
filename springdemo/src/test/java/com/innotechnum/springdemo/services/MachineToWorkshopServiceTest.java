@@ -26,7 +26,7 @@ class MachineToWorkshopServiceTest {
         Mockito.when(workshop.getId()).thenReturn(1L);
         Mockito.when(machineToWorkshop.getDateOut()).thenReturn(LocalDate.now());
 
-        machineToWorkshopService.transfer(machine.getId(), workshop.getId(), machineToWorkshop.getDateOut());
+        machineToWorkshopService.transfer(machineToWorkshop.getDateOut(), machine.getId(), workshop.getId());
 
         MachineToWorkshop machineToWorkshop1 = new MachineToWorkshop();
         machineToWorkshop1.setDateIn(machineToWorkshop.getDateOut().plusDays(1));

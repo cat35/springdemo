@@ -15,4 +15,5 @@ public class Type {
     private Long id;
     private String name;
 
+
 }

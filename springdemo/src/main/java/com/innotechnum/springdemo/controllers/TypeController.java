@@ -29,27 +29,24 @@ public class TypeController {
     }
 
 
-    @DeleteMapping("/types/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTypes(@PathVariable Long id){
         typeRepo.deleteById(id);
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateTypes(@RequestBody Type type, @PathVariable Long id){
+    public ResponseEntity<Type> updateTypes(@RequestBody Type type, @PathVariable Long id){
         Optional<Type> typeOptional = typeRepo.findById(id);
 
         if(!typeOptional.isPresent())
             return ResponseEntity.notFound().build();
 
         type.setId(id);
-
-
-
         return ResponseEntity.ok(typeRepo.save(type));
     }
 
     @PostMapping
-    public ResponseEntity<Object> createType(@RequestBody Type type){
+    public ResponseEntity<Type> createType(@RequestBody Type type){
         Type savedType = typeRepo.save(type);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedType.getId()).toUri();

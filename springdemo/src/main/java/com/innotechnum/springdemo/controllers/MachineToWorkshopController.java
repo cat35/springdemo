@@ -2,13 +2,12 @@ package com.innotechnum.springdemo.controllers;
 
 
 import com.innotechnum.springdemo.entities.MachineToWorkshop;
+import com.innotechnum.springdemo.entities.Workshop;
 import com.innotechnum.springdemo.repository.MachineToWorkshopRepo;
 import com.innotechnum.springdemo.services.MachineToWorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,10 +30,17 @@ public class MachineToWorkshopController {
         return (List<MachineToWorkshop>) machineToWorkshopRepo.findAll();
     }
 
-    @PostMapping("/machineToWorkshop/change")
-    public MachineToWorkshop processTransfer(Long idMachine, Long idWorkshop, LocalDate date) {
+    @PostMapping
+    public ResponseEntity<MachineToWorkshop> create(@RequestBody MachineToWorkshop machineToWorkshop) {
+        MachineToWorkshop savedMachineToWorkshop = machineToWorkshopRepo.save(machineToWorkshop);
+
+        return ResponseEntity.ok(savedMachineToWorkshop);
+    }
+
+    @PostMapping("/change")
+    public MachineToWorkshop processTransfer(LocalDate date, Long idMachine, Long idWorkshop) {
         MachineToWorkshop machineToWorkshop;
-            machineToWorkshop = service.transfer(idMachine, idWorkshop, date);
+            machineToWorkshop = service.transfer(date, idMachine, idWorkshop);
         return machineToWorkshop;
     }
 }

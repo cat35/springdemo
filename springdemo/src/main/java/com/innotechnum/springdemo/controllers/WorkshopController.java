@@ -27,13 +27,13 @@ public class WorkshopController {
         return (List<Workshop>) workshopRepo.findAll();
     }
 
-    @DeleteMapping("/workshops/{id}")
+    @DeleteMapping("/{id}")
     public void deleteWorkshop(@PathVariable Long id) {
         workshopRepo.deleteById(id);
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateWorkshop(@RequestBody Workshop workshop, @PathVariable Long id) {
+    public ResponseEntity<Workshop> updateWorkshop(@RequestBody Workshop workshop, @PathVariable Long id) {
         Optional<Workshop> typeOptional = workshopRepo.findById(id);
 
         if (!typeOptional.isPresent())
@@ -46,12 +46,10 @@ public class WorkshopController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createWorkshop(@RequestBody Workshop workshop) {
+    public ResponseEntity<Workshop> createWorkshop(@RequestBody Workshop workshop) {
         Workshop savedWorkshop = workshopRepo.save(workshop);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedWorkshop.getId()).toUri();
-
-        return ResponseEntity.created(location).build();
+                return ResponseEntity.ok(savedWorkshop);
     }
 
 }

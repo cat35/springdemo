@@ -27,13 +27,13 @@ public class ModelController {
         return (List<Model>) modelRepo.findAll();
     }
 
-    @DeleteMapping("/models/{id}")
+    @DeleteMapping("/{id}")
     public void deleteModel(@PathVariable Long id){
         modelRepo.deleteById(id);
     }
 
     @PutMapping
-    public ResponseEntity<Object> updateModels(@RequestBody Model model, @PathVariable Long id){
+    public ResponseEntity<Model> updateModels(@RequestBody Model model, @PathVariable Long id){
         Optional<Model> modelOptional = modelRepo.findById(id);
 
         if(!modelOptional.isPresent())
@@ -47,7 +47,7 @@ public class ModelController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createModels(@RequestBody Model model){
+    public ResponseEntity<Model> createModels(@RequestBody Model model){
         Model savedModel = modelRepo.save(model);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedModel.getId()).toUri();
