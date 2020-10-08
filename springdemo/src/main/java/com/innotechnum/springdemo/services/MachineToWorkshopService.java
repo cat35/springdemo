@@ -20,14 +20,15 @@ public class MachineToWorkshopService {
 
     @Transactional
     public MachineToWorkshop transfer(LocalDate date, Long idMachine, Long idWorkshop){
-
             MachineToWorkshop machineToWorkshop = machineToWorkshopRepo.findFirstByIdMachineOrderByDateInDesc(idMachine);
-            machineToWorkshop.setDateOut(date);
-            MachineToWorkshop machineToWorkshop1 = new MachineToWorkshop();
-            machineToWorkshop1.setDateIn(date.plusDays(1));
-            machineToWorkshop1.setIdWorkshop(idWorkshop);
-        machineToWorkshopRepo.save(machineToWorkshop1);
-            return machineToWorkshop1;
+            if(null!=machineToWorkshop) {
+                machineToWorkshop.setDateOut(date);
+                machineToWorkshopRepo.save(machineToWorkshop);
+            }
+            MachineToWorkshop newMachineToWorkshop1 = new MachineToWorkshop();
+        newMachineToWorkshop1.setDateIn(date.plusDays(1));
+        newMachineToWorkshop1.setIdWorkshop(idWorkshop);
+        return machineToWorkshopRepo.save(newMachineToWorkshop1);
 
     }
 }

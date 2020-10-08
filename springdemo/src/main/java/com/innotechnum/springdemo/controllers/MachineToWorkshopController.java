@@ -38,9 +38,8 @@ public class MachineToWorkshopController {
     }
 
     @PostMapping("/change")
-    public MachineToWorkshop processTransfer(LocalDate date, Long idMachine, Long idWorkshop) {
-        MachineToWorkshop machineToWorkshop;
-            machineToWorkshop = service.transfer(date, idMachine, idWorkshop);
-        return machineToWorkshop;
+    public MachineToWorkshop processTransfer(@RequestBody MachineToWorkshop machineToWorkshop) {
+
+        return service.transfer(machineToWorkshop.getDateIn(), machineToWorkshop.getIdMachine(), machineToWorkshop.getIdWorkshop());
     }
 }
