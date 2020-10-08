@@ -28,9 +28,9 @@ public class MachineToWorkshop {
 //    @ManyToOne
 //    @JoinColumn(name = "workshop_id")
 //    private Workshop workshop;
-
+    @Column(nullable = false)
     private Long idMachine;
-
+    @Column(nullable = false)
     private Long idWorkshop;
 
 }
